@@ -19,6 +19,7 @@
 #' my_cf <- read.cf(c.forest, X = c(2:7))
 
 read.cf <- function(object, X = "All"){
+  library(dplyr)
   #check causal forest object
   if(class(object)[1]!="causal_forest") stop("Fail to read causal forest object. Please check object type.")
   #create dataframe for t-SNE clusterin
