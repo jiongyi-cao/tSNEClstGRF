@@ -53,3 +53,5 @@ create.shiny(tsne_obj)
 
 References
 ----------
+
+Athey Susan, Julie Tibshirani, and Stefan Wager. <a href="https://arxiv.org/abs/1610.01271">Generalized Random Forests.</a> <i>Annals of Statistics (forthcoming)</i>, 2018
