@@ -6,7 +6,7 @@
 #' @param object causal forest object that has been created.
 #' @param X Vector of covariate names or number of clumns to includes in later t-SNE analysis.Defaults to all covariates in X.orig of cf object.
 #' @return A dataframe with selected covariates that is ready for t-SNE clustering analysis
-#' @references Athey, Susan, Julie Tibshirani, and Stefan Wager. Generalized Random Forests. Annals of Statistics (forthcoming), 2018
+#' @references Athey Susan, Julie Tibshirani, and Stefan Wager. Generalized Random Forests. Annals of Statistics (forthcoming), 2018
 #' @references Wager, Stefan, and Susan Athey. Estimation and Inference of Heterogeneous Treatment Effects using Random Forests. Journal of the American Statistical Association (forthcoming), 2018.
 #' @export
 #' @examples
