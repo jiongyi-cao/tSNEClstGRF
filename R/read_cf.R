@@ -1,7 +1,7 @@
 #' Read causal forest object
 #'
-#' tSNE-Clustering visualization start by a causal forest object. 
-#' This function read a causal forest object that has been created and 
+#' tSNE-Clustering visualization start by a causal forest object.
+#' This function read a causal forest object that has been created and
 #' process it for next t-SNE clustering analysis.
 #' @param object causal forest object that has been created.
 #' @param X Vector of covariate names or number of clumns to includes in later t-SNE analysis.Defaults to all covariates in X.orig of cf object.
@@ -16,9 +16,9 @@
 #'W = rbinom(n, 1, 0.5)
 #'Y = pmax(X[,1], 0) * W + X[,2] + pmin(X[,3], 0) + rnorm(n)
 #' c.forest <- causal_forest(X, Y, W)
-#' my_cf <- read_cf(c.forest, X = c(2:7))
+#' my_cf <- read.cf(c.forest, X = c(2:7))
 
-read_cf <- function(object, X = "All"){
+read.cf <- function(object, X = "All"){
   #check causal forest object
   if(class(object)[1]!="causal_forest") stop("Fail to read causal forest object. Please check object type.")
   #create dataframe for t-SNE clusterin
