@@ -1,11 +1,21 @@
 Package: tSneClstGRF
 Type: Package
-Title: What the Package Does (Title Case)
+Title: t-SNE Clustering analysis for causal forest object
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Author: Jiongyi Cao
+Maintainer: Jiongyi Cao <jiongyi@uchicago.edu>
+Description: An interface to explore, analyze, and visualize causal heterogeneous effect 
+modeled by causal forest proposed in “Generalized Random Forests” (Athey et al, 2018) in R.
+Depends: R (>= 3.5.1),shiny,data.table
+Imports:
+    dplyr,
+    Rtsne,
+    StatMatch,
+    MASS,
+    ggplot2,
+    plotly
+Suggests:
+    grf
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
