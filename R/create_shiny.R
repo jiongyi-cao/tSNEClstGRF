@@ -10,7 +10,8 @@ create.shiny <- function(tsne_dt){
   library(shiny)
   library(data.table)
   #library(plotly)
-
+  cols <- c("positive p < 0.05" = "indianred2", "positive 0.05 < p < 0.1" = "orange1",
+            "p > 0.1" = "limegreen","negative 0.05 < p < 0.1"="deepskyblue","negative p < 0.05"="orchid3")
   numVar <-ncol(tsne_dt) - 5 #extract feature num
   nameVar <- colnames(tsne_dt)[6:ncol(tsne_dt)] #extract feature name
   numeric_list <-  unlist(lapply(tsne_dt[,6:ncol(tsne_dt)],is.numeric)) #extract numeric feature
@@ -23,7 +24,7 @@ create.shiny <- function(tsne_dt){
       selectInput("colselect", "Feature to Display",
                   colnames(tsne_dt)[6:length(colnames(tsne_dt))],
                   multiple = TRUE,
-                  selected = colnames(tsne_dt)[6:8]),
+                  selected = colnames(tsne_dt)[6:7]),
       sliderInput('tau', "Treatment Effect", min = round(min(tsne_dt$tau),3), max = round(max(tsne_dt$tau),3), value = c(round(min(tsne_dt$tau),3),round(max(tsne_dt$tau),3))),
 
       uiOutput("selection")
