@@ -1,6 +1,6 @@
 #' Generate shiny interface for data visualization and exploration
 #'
-#' This function generate an interactive shiny application that can be used to visualize and explore heterogeneous effect captured by GRF.
+#' This function generate an interactive shiny application for visualizing and exploring treatment effect modeled by GRF.
 #' @param object t-Sne clustering object that has been created.
 #' @export
 #' @examples
@@ -9,6 +9,8 @@
 create.shiny <- function(tsne_dt){
   library(shiny)
   library(data.table)
+  #library(plotly)
+
   numVar <-ncol(tsne_dt) - 5 #extract feature num
   nameVar <- colnames(tsne_dt)[6:ncol(tsne_dt)] #extract feature name
   numeric_list <-  unlist(lapply(tsne_dt[,6:ncol(tsne_dt)],is.numeric)) #extract numeric feature
@@ -61,9 +63,6 @@ create.shiny <- function(tsne_dt){
       n <- dim(dataset())[1]
       sprintf("Found %i observations under this criteria", n)
     })
-
-
-
 
 
     dataset <- reactive({

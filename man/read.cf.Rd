@@ -11,13 +11,10 @@ read.cf(object, X = "All")
 
 \item{X}{Vector of covariate names or number of clumns to includes in later t-SNE analysis.Defaults to all covariates in X.orig of cf object.}
 }
-\value{
-A dataframe with selected covariates that is ready for t-SNE clustering analysis
-}
 \description{
-tSNE-Clustering visualization start by a causal forest object.
+tSNE-Clustering visualization starts by a causal forest object.
 This function read a causal forest object that has been created and
-process it for next t-SNE clustering analysis.
+process data for next t-SNE clustering analysis.
 }
 \examples{
 # Train a causal forest.
@@ -29,7 +26,7 @@ c.forest <- causal_forest(X, Y, W)
 my_cf <- read.cf(c.forest, X = c(2:7))
 }
 \references{
-Athey, Susan, Julie Tibshirani, and Stefan Wager. Generalized Random Forests. Annals of Statistics (forthcoming), 2018
+Athey Susan, Julie Tibshirani, and Stefan Wager. Generalized Random Forests. Annals of Statistics (forthcoming), 2018
 
 Wager, Stefan, and Susan Athey. Estimation and Inference of Heterogeneous Treatment Effects using Random Forests. Journal of the American Statistical Association (forthcoming), 2018.
 }

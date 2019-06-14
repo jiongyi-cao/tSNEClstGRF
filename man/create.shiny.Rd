@@ -10,7 +10,7 @@ create.shiny(tsne_dt)
 \item{object}{t-Sne clustering object that has been created.}
 }
 \description{
-This function generate an interactive shiny application that can be used to visualize and explore heterogeneous effect captured by GRF.
+This function generate an interactive shiny application for visualizing and exploring treatment effect modeled by GRF.
 }
 \examples{
 create.shiny(tsne_obj$result)
