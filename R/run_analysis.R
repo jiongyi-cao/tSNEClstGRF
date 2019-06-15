@@ -7,7 +7,7 @@
 #' @param perplexity Perplexity parameter (should no larger than 3 * perplexity < nrow(X) - 1, see details for interpretation).
 #' @return A t-SNE clustering object with the follwing elements:
 #' \item{distance} distance metrix of covariate space.
-#' \item{result} final datafram proceed for visualization
+#' \item{result} final dataframe proceed for visualization
 #' @references Maaten, L. Van Der, 2014. Accelerating t-SNE using Tree-Based Algorithms. Journal of Machine Learning Research, 15, p.3221-3245
 #' @references van der Maaten, L.J.P. & Hinton, G.E., 2008. Visualizing High-Dimensional Data Using t-SNE. Journal of Machine Learning Research, 9, pp.2579-2605.
 #' @export
@@ -17,6 +17,7 @@
 
 
 run.analsis<- function(object,n,distance = NULL, perp= NULL){
+    library(dplyr)
     #note about covariate type for shiny application/as well as gower dist
     tClst_obj <- list()
 
@@ -31,6 +32,7 @@ run.analsis<- function(object,n,distance = NULL, perp= NULL){
     if(n > size) stop("sample size larger than total data size")
     set.seed(1234)
     index <- sample(size, n)
+    tClst_obj$index <- index
 
     #calculated distance metric based on distance algorithm
     if(is.null(distance)) distance <- StatMatch::gower.dist(object$X[index,])
@@ -44,18 +46,15 @@ run.analsis<- function(object,n,distance = NULL, perp= NULL){
     tClst_obj$result <- tsne_obj$Y %>%
       data.frame() %>%
       setNames(c("X", "Y"))%>%
-      mutate(tau = object$prd[index], z = (object$prd/sd(object$prd))[index]) %>%
+      mutate(tau = object$prd[index]) %>%
       mutate(Level = case_when(
-        z >= -1.28 & z < 1.28 ~ "p > 0.1",
-        z >= 1.28 & z <  1.96 ~ "positive 0.05 < p < 0.1",
-        z >= 1.96 ~ "positive p < 0.05",
-        z <= -1.28 & z >  -1.96 ~ "negative 0.05 < p < 0.1",
-        z <= -1.96 ~ "negative p < 0.05"),
-        Level = factor(Level, levels=c("p > 0.1","positive 0.05 < p < 0.1","positive p < 0.05","negative 0.05 < p < 0.1","negative p < 0.05"))) %>%
-      cbind.data.frame(object$X[index,])
-
-    #define class for object
-    #class() <- c("")
+        tau < quantile(tau, 0.2) ~ "1st quintile",
+        tau >= quantile(tau,0.2) & tau < quantile(tau,0.4) ~"2nd quintile",
+        tau >= quantile(tau,0.4) & tau < quantile(tau,0.6) ~"3rd quintile",
+        tau >= quantile(tau,0.6) & tau < quantile(tau,0.8) ~"4th quintile",
+        tau >= quantile(tau,0.8) ~"5th quintile"),
+        Level = factor(Level, levels = c("1st quintile","2nd quintile","3rd quintile","4th quintile","5th quintile"))
+        ) %>% cbind.data.frame(object$X[index,])
 
     tClst_obj
 

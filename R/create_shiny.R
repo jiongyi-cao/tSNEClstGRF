@@ -10,8 +10,8 @@ create.shiny <- function(tsne_dt){
   library(shiny)
   library(data.table)
   #library(plotly)
-  cols <- c("positive p < 0.05" = "indianred2", "positive 0.05 < p < 0.1" = "orange1",
-            "p > 0.1" = "limegreen","negative 0.05 < p < 0.1"="deepskyblue","negative p < 0.05"="orchid3")
+  cols <- c("5th quitile" = "indianred2", "4th quintile" = "orange1",
+            "3rd quintile" = "limegreen","2nd quintile"="deepskyblue","1st quintile"="orchid3")
   numVar <-ncol(tsne_dt) - 5 #extract feature num
   nameVar <- colnames(tsne_dt)[6:ncol(tsne_dt)] #extract feature name
   numeric_list <-  unlist(lapply(tsne_dt[,6:ncol(tsne_dt)],is.numeric)) #extract numeric feature
@@ -100,9 +100,9 @@ create.shiny <- function(tsne_dt){
             str <- paste(str,'</br>',nameVar[i],":",dt[[nameVar[i]]][x])
           }
           str})
-        g <- ggplot2::ggplot(dt,aes(x = X, y = Y,color= Level,alpha = abs(z),
+        g <- ggplot2::ggplot(dt,aes(x = X, y = Y,color= Level,alpha = abs(tau),
                            text = txt)) +
-          scale_colour_manual(values = cols,breaks = c("positive p < 0.05" , "positive 0.05 < p < 0.1" ,"p > 0.1", "negative 0.05 < p < 0.1","negative p < 0.05"))+guides(alpha = F) +
+          scale_colour_manual(values = cols,breaks = c("1st quintile","2nd quintile","3rd quintile","4th quintile","5th quitile"))+guides(alpha = F) +
           geom_point() +
           theme(axis.line=element_blank(),axis.text.x=element_blank(),axis.text.y=element_blank(),axis.ticks=element_blank(),axis.title.x=element_blank(),axis.title.y=element_blank()) +
           xlim(range(tsne_dt$X)[1]-1,range(tsne_dt$X)[2]+1) +
