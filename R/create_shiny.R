@@ -10,11 +10,11 @@ create.shiny <- function(tsne_dt){
   library(shiny)
   library(data.table)
   #library(plotly)
-  cols <- c("5th quitile" = "indianred2", "4th quintile" = "orange1",
+  cols <- c("5th quintile" = "indianred2", "4th quintile" = "orange1",
             "3rd quintile" = "limegreen","2nd quintile"="deepskyblue","1st quintile"="orchid3")
-  numVar <-ncol(tsne_dt) - 5 #extract feature num
-  nameVar <- colnames(tsne_dt)[6:ncol(tsne_dt)] #extract feature name
-  numeric_list <-  unlist(lapply(tsne_dt[,6:ncol(tsne_dt)],is.numeric)) #extract numeric feature
+  numVar <-ncol(tsne_dt) - 4 #extract feature num
+  nameVar <- colnames(tsne_dt)[5:ncol(tsne_dt)] #extract feature name
+  numeric_list <-  unlist(lapply(tsne_dt[,5:ncol(tsne_dt)],is.numeric)) #extract numeric feature
 
   ui <- fluidPage(
 
@@ -22,9 +22,9 @@ create.shiny <- function(tsne_dt){
 
     sidebarPanel(
       selectInput("colselect", "Feature to Display",
-                  colnames(tsne_dt)[6:length(colnames(tsne_dt))],
+                  colnames(tsne_dt)[5:length(colnames(tsne_dt))],
                   multiple = TRUE,
-                  selected = colnames(tsne_dt)[6:7]),
+                  selected = colnames(tsne_dt)[5:6]),
       sliderInput('tau', "Treatment Effect", min = round(min(tsne_dt$tau),3), max = round(max(tsne_dt$tau),3), value = c(round(min(tsne_dt$tau),3),round(max(tsne_dt$tau),3))),
 
       uiOutput("selection")
@@ -44,10 +44,10 @@ create.shiny <- function(tsne_dt){
     for(i in 1:numVar){
       if(numeric_list[[i]]){
         #create slider input for numeric
-        l[[names(numeric_list[i])]] <- sliderInput(names(numeric_list[i]), names(numeric_list[i]), min = min(tsne_dt[,5+i]), max = max(tsne_dt[,5+i]),value = c(min(tsne_dt[,5+i]),max(tsne_dt[,5+i])));
+        l[[names(numeric_list[i])]] <- sliderInput(names(numeric_list[i]), names(numeric_list[i]), min =round(min(tsne_dt[,4+i]),3) , max = round(max(tsne_dt[,4+i]),3),value = round(c(min(tsne_dt[,4+i]),max(tsne_dt[,4+i])),3));
       }else{
         #create check box for catagorical
-        l[[names(numeric_list[i])]] <- checkboxGroupInput(names(numeric_list[i]), names(numeric_list[i]), choices = levels(tsne_dt[,5+i]),selected = levels(tsne_dt[,5+i]));
+        l[[names(numeric_list[i])]] <- checkboxGroupInput(names(numeric_list[i]), names(numeric_list[i]), choices = levels(tsne_dt[,4+i]),selected = levels(tsne_dt[,4+i]));
       }
     }
 
@@ -95,14 +95,15 @@ create.shiny <- function(tsne_dt){
         dt <- dataset()
         #custom text output
         txt <- sapply(1:nrow(dt),function(x){
-          str <- ""
+          str <- paste('</br>',"tau:",dt[["tau"]][x])
           for(i in 1:numVar){
             str <- paste(str,'</br>',nameVar[i],":",dt[[nameVar[i]]][x])
           }
           str})
+
         g <- ggplot2::ggplot(dt,aes(x = X, y = Y,color= Level,alpha = abs(tau),
                            text = txt)) +
-          scale_colour_manual(values = cols,breaks = c("1st quintile","2nd quintile","3rd quintile","4th quintile","5th quitile"))+guides(alpha = F) +
+          scale_colour_manual(values = cols,breaks = c("1st quintile","2nd quintile","3rd quintile","4th quintile","5th quintile"))+guides(alpha = F) +
           geom_point() +
           theme(axis.line=element_blank(),axis.text.x=element_blank(),axis.text.y=element_blank(),axis.ticks=element_blank(),axis.title.x=element_blank(),axis.title.y=element_blank()) +
           xlim(range(tsne_dt$X)[1]-1,range(tsne_dt$X)[2]+1) +

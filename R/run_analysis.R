@@ -6,6 +6,7 @@
 #' @param distance distance metrix of covariate space either provided by user or use default: gower distance
 #' @param perplexity Perplexity parameter (should no larger than 3 * perplexity < nrow(X) - 1, see details for interpretation).
 #' @return A t-SNE clustering object with the follwing elements:
+#' \item{index} sub sample index
 #' \item{distance} distance metrix of covariate space.
 #' \item{result} final dataframe proceed for visualization
 #' @references Maaten, L. Van Der, 2014. Accelerating t-SNE using Tree-Based Algorithms. Journal of Machine Learning Research, 15, p.3221-3245

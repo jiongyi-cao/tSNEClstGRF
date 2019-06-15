@@ -17,8 +17,9 @@ run.analsis(object, n, distance = NULL, perp = NULL)
 }
 \value{
 A t-SNE clustering object with the follwing elements:
+\item{index} sub sample index
 \item{distance} distance metrix of covariate space.
-\item{result} final datafram proceed for visualization
+\item{result} final dataframe proceed for visualization
 }
 \description{
 This function read previous proceeded causal forest object and get 2D projection of covariates space based on t-SNE algorithm
