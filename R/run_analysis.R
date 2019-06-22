@@ -2,7 +2,7 @@
 #'
 #' This function read previous proceeded causal forest object and get 2D projection of covariates space based on t-SNE algorithm
 #' @param object causal forest object that has been created.
-#' @param n size of subsample from whole dataset. Suggest no larger than 10,000.
+#' @param n size of subsample from whole dataset. Suggest no larger than few thousands.
 #' @param distance distance metrix of covariate space either provided by user or use default: gower distance
 #' @param perplexity Perplexity parameter (should no larger than 3 * perplexity < nrow(X) - 1, see details for interpretation).
 #' @return A t-SNE clustering object with the follwing elements:
@@ -25,7 +25,7 @@ run.analsis<- function(object,n,distance = NULL, perp= NULL){
     #set perpelexity
     if(is.null(perp)) {
       if (n >= 5000) perp = 500
-      else perp = floor(n/10)
+      else perp = floor(n/20)
     }
 
     #generate subsampling index
