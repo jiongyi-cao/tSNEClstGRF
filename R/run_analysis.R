@@ -35,7 +35,7 @@ run.analsis<- function(object,n,distance = NULL, perp= NULL){
     index <- sample(size, n)
     tClst_obj$index <- index
 
-    #calculated distance metric based on distance algorithm
+    #calculate distance metric based on distance algorithm
     if(is.null(distance)) distance <- StatMatch::gower.dist(object$X[index,])
     tClst_obj$dist <- distance
 
@@ -44,17 +44,23 @@ run.analsis<- function(object,n,distance = NULL, perp= NULL){
     tsne_obj <- Rtsne::Rtsne(distance, is_distance = TRUE, perplexity = perp)
 
     #create final dataframe
+    q <- round(quantile(object$prd,c(0,0.2,0.4,0.6,0.8,1)),4)
+    lab <- c(paste("1st quintile:",q[[1]],"~",q[[2]]),
+             paste("2nd quintile:",q[[2]],"~",q[[3]]),
+             paste("3rd quintile:",q[[3]],"~",q[[4]]),
+             paste("4th quintile:",q[[4]],"~",q[[5]]),
+             paste("5th quintile:",q[[5]],"~",q[[6]]))
     tClst_obj$result <- tsne_obj$Y %>%
       data.frame() %>%
       setNames(c("X", "Y"))%>%
       mutate(tau = object$prd[index]) %>%
       mutate(Level = case_when(
-        tau < quantile(tau, 0.2) ~ "1st quintile",
-        tau >= quantile(tau,0.2) & tau < quantile(tau,0.4) ~"2nd quintile",
-        tau >= quantile(tau,0.4) & tau < quantile(tau,0.6) ~"3rd quintile",
-        tau >= quantile(tau,0.6) & tau < quantile(tau,0.8) ~"4th quintile",
-        tau >= quantile(tau,0.8) ~"5th quintile"),
-        Level = factor(Level, levels = c("1st quintile","2nd quintile","3rd quintile","4th quintile","5th quintile"))
+        tau < q[[2]] ~ lab[1],
+        tau >= q[[2]] & tau < q[[3]] ~ lab[2],
+        tau >= q[[3]] & tau < q[[4]] ~ lab[3],
+        tau >= q[[4]] & tau < q[[5]] ~ lab[4],
+        tau >= q[[5]] ~ lab[5]),
+        Level = factor(Level, levels = lab)
         ) %>% cbind.data.frame(object$X[index,])
 
     tClst_obj

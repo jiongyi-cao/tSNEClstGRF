@@ -11,10 +11,9 @@ create.shiny <- function(tsne_dt){
   library(data.table)
   #library(plotly)
   #color scheme parameters
-  cols <- c("5th quintile" = "indianred2", "4th quintile" = "orange1",
-            "3rd quintile" = "limegreen","2nd quintile"="deepskyblue","1st quintile"="orchid3")
-  alpha <-
-
+  lev <- levels(tsne_dt$Level)
+  cols <- c("indianred2","orange1",
+            "limegreen", "deepskyblue","orchid3")
   numVar <-ncol(tsne_dt) - 4 #extract feature num
   nameVar <- colnames(tsne_dt)[5:ncol(tsne_dt)] #extract feature name
   numeric_list <-  unlist(lapply(tsne_dt[,5:ncol(tsne_dt)],is.numeric))#extract numeric feature
@@ -105,7 +104,7 @@ create.shiny <- function(tsne_dt){
           str})
         g <- ggplot2::ggplot(dt,aes(x = X, y = Y,color= Level,alpha = abs((tau)/sd(tau)),
                            text = txt)) +
-          scale_colour_manual(values = cols,breaks = c("1st quintile","2nd quintile","3rd quintile","4th quintile","5th quintile"))+guides(alpha = F) +
+          scale_colour_manual(values = cols,breaks = lev) +guides(alpha = F) +
           geom_point() +
           theme(axis.line=element_blank(),axis.text.x=element_blank(),axis.text.y=element_blank(),axis.ticks=element_blank(),axis.title.x=element_blank(),axis.title.y=element_blank()) +
           xlim(range(tsne_dt$X)[1]-1,range(tsne_dt$X)[2]+1) +
@@ -114,6 +113,6 @@ create.shiny <- function(tsne_dt){
       plotly::ggplotly(g,tooltip = "text")
     })
   }
-
   shinyApp(ui, server)
 }
+
