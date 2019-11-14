@@ -2,7 +2,7 @@
 #'
 #' tSNE-Clustering visualization starts by a causal forest object.
 #' This function read a causal forest object that has been created and
-#' process data for next t-SNE clustering analysis.
+#' process data for t-SNE clustering analysis on next stage.
 #' @param object causal forest object that has been created.
 #' @param X Vector of covariate names or number of clumns to includes in later t-SNE analysis.Defaults to all covariates in X.orig of cf object.
 #' @references Athey Susan, Julie Tibshirani, and Stefan Wager. Generalized Random Forests. Annals of Statistics (forthcoming), 2018
