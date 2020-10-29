@@ -1,6 +1,6 @@
-#' Generate shiny interface for data visualization and exploration
+#' Generate shiny interface for visualization and exploration
 #'
-#' This function generate an interactive shiny application for visualizing and exploring treatment effect modeled by GRF.
+#' This function generate an interactive shiny application for visualizing and exploring treatment effect estimated by GRF.
 #' @param object t-Sne clustering object that has been created.
 #' @export
 #' @examples
