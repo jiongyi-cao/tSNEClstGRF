@@ -9,7 +9,7 @@
 create.shiny <- function(tsne_dt){
   library(shiny)
   library(data.table)
-  #library(plotly)
+  library(plotly)
   #color scheme parameters
   lev <- levels(tsne_dt$Level)
   cols <- c("indianred2","orange1",
