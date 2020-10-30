@@ -54,9 +54,14 @@ application.
     #generate shiny application
     create.shiny(tsne_obj$result)
 
+<<<<<<< HEAD
 References
 ----------
 
+=======
+References 
+----------
+>>>>>>> 118116d36953c38aa7f1f230a1520a9bb0e38a95
 Athey Susan, Julie Tibshirani, and Stefan Wager.
 <a href="https://arxiv.org/abs/1610.01271">Generalized Random
 Forests.</a> <i>Annals of Statistics (forthcoming)</i>, 2018
