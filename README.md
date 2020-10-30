@@ -54,7 +54,9 @@ application.
     #generate shiny application
     create.shiny(tsne_obj$result)
 
-\#\#References Athey Susan, Julie Tibshirani, and Stefan Wager.
+References 
+----------
+Athey Susan, Julie Tibshirani, and Stefan Wager.
 <a href="https://arxiv.org/abs/1610.01271">Generalized Random
 Forests.</a> <i>Annals of Statistics (forthcoming)</i>, 2018
 
