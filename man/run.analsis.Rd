@@ -7,11 +7,11 @@
 run.analsis(object, n, distance = NULL, perp = NULL)
 }
 \arguments{
-\item{object}{causal forest object that has been created.}
+\item{object}{Causal forest object that has been created.}
 
-\item{n}{size of subsample from whole dataset. Suggest no larger than 10,000.}
+\item{n}{Size of subsample from whole dataset. Suggest no larger than few thousands.}
 
-\item{distance}{distance metrix of covariate space either provided by user or use default: gower distance}
+\item{distance}{Distance metrix of covariate space either provided by user or default: gower distance}
 
 \item{perplexity}{Perplexity parameter (should no larger than 3 * perplexity < nrow(X) - 1, see details for interpretation).}
 }

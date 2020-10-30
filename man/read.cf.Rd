@@ -14,7 +14,7 @@ read.cf(object, X = "All")
 \description{
 tSNE-Clustering visualization starts by a causal forest object.
 This function read a causal forest object that has been created and
-process data for next t-SNE clustering analysis.
+process data for t-SNE clustering analysis on next stage.
 }
 \examples{
 # Train a causal forest.

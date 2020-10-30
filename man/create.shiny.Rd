@@ -2,7 +2,7 @@
 % Please edit documentation in R/create_shiny.R
 \name{create.shiny}
 \alias{create.shiny}
-\title{Generate shiny interface for data visualization and exploration}
+\title{Generate shiny interface for visualization and exploration}
 \usage{
 create.shiny(tsne_dt)
 }
@@ -10,7 +10,7 @@ create.shiny(tsne_dt)
 \item{object}{t-Sne clustering object that has been created.}
 }
 \description{
-This function generate an interactive shiny application for visualizing and exploring treatment effect modeled by GRF.
+This function generate an interactive shiny application for visualizing and exploring treatment effect estimated by GRF.
 }
 \examples{
 create.shiny(tsne_obj$result)
