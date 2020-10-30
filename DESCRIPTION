@@ -16,5 +16,5 @@ Suggests:
     grf
 License: What license is it under?
 Encoding: UTF-8
-LazyData: false
+LazyData: True
 RoxygenNote: 7.1.1
