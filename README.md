@@ -1,6 +1,6 @@
-tSneClstGRF is a R package that generates an interactive shiny interface
-for easily visualizing and exploring heterogeneous causal effect modeled
-by causal forest proposed in Athey et al. (2018).
+tSneClstGRF is an R package that generates an interactive Shiny interface
+for easily visualizing and exploring heterogeneous causal effect estimated
+by causal forest proposed by Athey et al. (2018).
 
 Installation
 ------------
