@@ -46,11 +46,11 @@ run.analsis<- function(object,n,distance = NULL, perp= NULL){
 
     #create final dataframe
     q <- round(quantile(object$prd,c(0,0.2,0.4,0.6,0.8,1)),4)
-    lab <- c(paste("1st quintile:",q[[1]],"~",q[[2]]),
-             paste("2nd quintile:",q[[2]],"~",q[[3]]),
-             paste("3rd quintile:",q[[3]],"~",q[[4]]),
-             paste("4th quintile:",q[[4]],"~",q[[5]]),
-             paste("5th quintile:",q[[5]],"~",q[[6]]))
+    lab <- c(paste("1st quantile:",q[[1]],"~",q[[2]]),
+             paste("2nd quantile:",q[[2]],"~",q[[3]]),
+             paste("3rd quantile:",q[[3]],"~",q[[4]]),
+             paste("4th quantile:",q[[4]],"~",q[[5]]),
+             paste("5th quantile:",q[[5]],"~",q[[6]]))
     tClst_obj$result <- tsne_obj$Y %>%
       data.frame() %>%
       setNames(c("X", "Y"))%>%
